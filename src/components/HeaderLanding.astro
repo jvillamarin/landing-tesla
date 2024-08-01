@@ -1,0 +1,70 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<header id="landing-header" class="py-3 px-10 flex fixed justify-between w-full items-center text-white z-40" >
+    <div class="flex flex-grow basis-0">
+        <Logo/>
+    </div>
+    <nav>
+        <ul class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-700 [&>li]:px-4 [&>li]:py-2">
+            <li><a href="#">Model S</a></li>
+            <li><a href="#">Model 3</a></li>
+            <li><a href="#">Model X</a></li>
+            <li><a href="#">Model Y</a></li>
+            <li><a href="#">Powerwall</a></li>
+            <li><a href="#">Carga</a></li>
+        </ul>
+    </nav>
+    <nav class="flex flex-grow justify-end basis-0">
+        <ul class="flex text-sm [&>li]:px-4 [&>li]:py-2 [&>li>a]:transition-colors [&>li>a]:duration-700">
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Tienda</a></li>
+            <li><a href="#">Cuenta</a></li>
+            <li><a href="#">Menu</a></li>
+        </ul>
+    </nav>
+    <div id="menu-backdrop" class="absolute bg-black/10 backdrop-blur-lg
+    left-0 top-0
+    rounded translate-x-[var(--left)] translate-y-[var(--top)] w-[var(--width)] h-[var(--height)] transition-all duration-300 ease-in-out -z-10 opacity-0
+    ">
+    </div>			
+</header>
+<script>
+    const menubackdrop = document.getElementById('menu-backdrop');
+    const menuList = document.querySelectorAll('#landing-header li');
+    menuList.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const rect = item.getBoundingClientRect();
+            menubackdrop.style.setProperty("--left",`${rect.left}px`)
+            menubackdrop.style.setProperty("--top",`${rect.top}px`)
+            menubackdrop.style.setProperty("--width",`${rect.width}px`)
+            menubackdrop.style.setProperty("--height",`${rect.height}px`)
+            menubackdrop.style.opacity= "1"            
+        });
+    })
+
+    menuList.forEach(item=>{
+        item.addEventListener('mouseleave', () => {
+            menubackdrop.style.opacity= "0"            
+        })
+    })
+
+    const $headerElement = document.querySelector("#landing-header")as HTMLElement
+    const observerOptions ={
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.9
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const color = entry.target.getAttribute("data-header-color")
+                $headerElement.style.color = color
+            }
+            })
+    },observerOptions)
+
+    const $sectionElements = document.querySelectorAll(".landing-section")
+    $sectionElements.forEach((section)=> observer.observe(section))
+</script>
