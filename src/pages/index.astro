@@ -1,9 +1,13 @@
 ---
 import HeaderLanding from '../components/HeaderLanding.astro';
 import HeroSection from '../components/HeroSection.astro';
+import Modelo3 from '../components/Modelo3.astro';
+import ModeloX from '../components/ModeloX.astro';
 import ModelY from '../components/ModelY.astro';
+import Carga from '../components/Carga.astro';
 
 import Layout from '../layouts/Layout.astro';
+import ModeloS from '../components/ModeloS.astro';
 
 ---
 
@@ -12,23 +16,23 @@ import Layout from '../layouts/Layout.astro';
 	<main class="snap-y snap-mandatory h-screen w-full relative overflow-y-auto scroll-smooth">	
 				
 		<div class="snap-start">
-			<HeroSection/>
+			<HeroSection/>			
 		</div>
 		<div class="snap-center">
 			<ModelY/>
 		</div>
 		<div class="snap-center">
-			<HeroSection/>
+			<Modelo3/>
 		</div>
 		<div class="snap-center">
-			<HeroSection/>
+			<ModeloS/>
 		</div>
 		<div class="snap-center">
-			<HeroSection/>
+			<ModeloX/>
 		</div>
-		<div class="snap-center">
-			<HeroSection/>
-		</div>
+		<div class="snap-center">			
+			<Carga/>
+		</div>		
 	</main>
 </Layout>
 
